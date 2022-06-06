@@ -1,0 +1,26 @@
+{
+  "name": "opcua-server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "tsc": "tsc",
+    "start": "ts-node src/opcuaservertcm.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^16.0.0",
+    "easy-table": "^1.2.0",
+    "mqtt": "^4.3.7",
+    "node-opcua": "^2.65.1",
+    "node-opcua-crypto": "^1.9.0",
+    "treeify": "^1.1.0",
+    "util": "^0.12.4",
+    "yargs": "^17.4.0"
+  },
+  "devDependencies": {
+    "@types/treeify": "^1.0.0",
+    "@types/yargs": "^17.0.10"
+  }
+}

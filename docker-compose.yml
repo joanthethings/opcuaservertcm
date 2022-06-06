@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  opcua-server:
+    container_name: opcua-server
+    restart: always
+    privileged: true
+    ports:
+      - 26543:26543
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - main
+
+networks:
+  main:
+    driver: bridge
