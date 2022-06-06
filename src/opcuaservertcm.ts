@@ -127,35 +127,26 @@ function construct_my_address_space(server: OPCUAServer) {
     let power = Math.floor(Math.random() * 10);
     let on = 0
 
-    namespace.addVariable({
+    const powerVariable = namespace.addVariable({
         componentOf: device,
         nodeId: `ns=1;b=1020FFAA;`, // some opaque NodeId in namespace 4
         browseName: "power",
         dataType: "Double",
-        value: {
-            get: () => new Variant({ dataType: DataType.Double, value: power }),
-            // The machine will be pushing the data into here, should we forward data to mqtt topic here?
-            set: (variant: { value: any }) => {
-                power = parseFloat(variant.value);
-                return StatusCodes.Good;
-            }
-        }
+        value: new Variant({ dataType: DataType.Double, value: power })
     });
 
-    namespace.addVariable({
+    const onVariable = namespace.addVariable({
         componentOf: device,
         nodeId: `ns=1;b=1020FFAB;`, // some opaque NodeId in namespace 4
         browseName: "on",
         dataType: "Double",
-        value: {
-            get: () => new Variant({ dataType: DataType.Double, value: on }),
-            // The machine will be pushing the data into here, should we forward data to mqtt topic here?
-            set: (variant: { value: any }) => {
-                on = parseFloat(variant.value);
-                return StatusCodes.Good;
-            }
-        }
+        value: new Variant({ dataType: DataType.Double, value: 1 })
     });
+
+    setInterval(function () {
+        var fluctuation = Math.floor(Math.random() * 10);
+        powerVariable.setValueFromSource(new Variant({ dataType: DataType.Double, value: fluctuation }));
+    }, 400);
 }
 
 // Entry function
